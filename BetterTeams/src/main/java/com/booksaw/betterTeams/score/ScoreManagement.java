@@ -1,6 +1,7 @@
 package com.booksaw.betterTeams.score;
 
 import com.booksaw.betterTeams.Main;
+import com.booksaw.betterTeams.FoliaScheduler;
 import com.booksaw.betterTeams.Team;
 import com.booksaw.betterTeams.customEvents.post.PostPurgeEvent;
 import com.booksaw.betterTeams.score.ScoreChange.ChangeType;

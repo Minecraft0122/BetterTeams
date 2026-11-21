@@ -1,6 +1,7 @@
 package com.booksaw.betterTeams.integrations.hologram;
 
 import com.booksaw.betterTeams.Main;
+import com.booksaw.betterTeams.FoliaScheduler;
 import com.booksaw.betterTeams.Team;
 import com.booksaw.betterTeams.message.MessageManager;
 import com.booksaw.betterTeams.text.LegacyTextUtils;

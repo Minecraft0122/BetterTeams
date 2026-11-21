@@ -1,6 +1,7 @@
 package com.booksaw.betterTeams.integrations.apollo;
 
 import com.booksaw.betterTeams.Main;
+import com.booksaw.betterTeams.FoliaScheduler;
 import com.booksaw.betterTeams.Team;
 import com.booksaw.betterTeams.TeamPlayer;
 import com.booksaw.betterTeams.customEvents.post.PostDisbandTeamEvent;
