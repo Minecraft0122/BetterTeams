@@ -1,6 +1,7 @@
 package com.booksaw.betterTeams.events;
 
 import com.booksaw.betterTeams.Main;
+import com.booksaw.betterTeams.FoliaScheduler;
 import com.booksaw.betterTeams.Team;
 import com.booksaw.betterTeams.customEvents.BelowNameChangeEvent;
 import com.booksaw.betterTeams.customEvents.BelowNameChangeEvent.ChangeType;
@@ -44,7 +45,11 @@ public class MCTeamManagement implements Listener {
 	}
 
 	public void displayBelowName(Player player) {
-		player.setScoreboard(board);
+		// Folia does not support assigning a Bukkit scoreboard to an individual player.
+		// Team metadata on the main scoreboard remains usable, so only skip this binding.
+		if (!FoliaScheduler.isFolia()) {
+			player.setScoreboard(board);
+		}
 
 		Team team = Team.getTeam(player);
 		if (team == null) {

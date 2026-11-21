@@ -13,9 +13,11 @@ import java.util.function.Consumer;
 public final class FoliaScheduler {
     private FoliaScheduler() {}
 
-    private static boolean folia() {
+    public static boolean isFolia() {
         return hasMethod(Bukkit.getServer().getClass(), "getGlobalRegionScheduler");
     }
+
+    private static boolean folia() { return isFolia(); }
 
     public static void run(Plugin plugin, Runnable task) {
         if (!folia()) { Bukkit.getScheduler().runTask(plugin, task); return; }
