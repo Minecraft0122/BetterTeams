@@ -45,11 +45,11 @@ public class MCTeamManagement implements Listener {
 	}
 
 	public void displayBelowName(Player player) {
-		// Folia does not support assigning a Bukkit scoreboard to an individual player.
-		// Team metadata on the main scoreboard remains usable, so only skip this binding.
-		if (!FoliaScheduler.isFolia()) {
-			player.setScoreboard(board);
+		// Folia does not support the Bukkit scoreboard operations used for team name tags.
+		if (FoliaScheduler.isFolia()) {
+			return;
 		}
+		player.setScoreboard(board);
 
 		Team team = Team.getTeam(player);
 		if (team == null) {
@@ -107,6 +107,9 @@ public class MCTeamManagement implements Listener {
 	 * @param callEvent if BelowNameChangeEvent should be called
 	 */
 	public void remove(Player player, boolean callEvent) {
+		if (FoliaScheduler.isFolia()) {
+			return;
+		}
 
 		if (player == null) {
 			return;
