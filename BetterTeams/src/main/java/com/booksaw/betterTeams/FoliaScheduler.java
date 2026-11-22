@@ -2,10 +2,12 @@ package com.booksaw.betterTeams;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
+import org.bukkit.Location;
 import org.bukkit.plugin.Plugin;
 
 import java.lang.reflect.Method;
 import java.util.concurrent.Executors;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
@@ -61,6 +63,16 @@ public final class FoliaScheduler {
             Method method = scheduler.getClass().getMethod("runDelayed", Plugin.class, Consumer.class, Runnable.class, long.class);
             method.invoke(scheduler, plugin, consumer(task), null, delay);
         } catch (ReflectiveOperationException e) { throw new IllegalStateException("Unable to schedule Folia entity task", e); }
+    }
+
+    @SuppressWarnings("unchecked")
+    public static CompletableFuture<Boolean> teleportAsync(Entity entity, Location destination) {
+        try {
+            return (CompletableFuture<Boolean>) entity.getClass().getMethod("teleportAsync", Location.class)
+                    .invoke(entity, destination);
+        } catch (ReflectiveOperationException e) {
+            throw new IllegalStateException("Folia does not expose asynchronous entity teleport", e);
+        }
     }
 
     private static Consumer<Object> consumer(Runnable task) { return ignored -> task.run(); }

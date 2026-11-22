@@ -78,7 +78,28 @@ public class PlayerTeleport {
 			return;
 		}
 
-		player.teleport(location);
+		if (FoliaScheduler.isFolia()) {
+			FoliaScheduler.teleportAsync(player, location).whenComplete((success, error) ->
+					FoliaScheduler.runOnEntity(Main.plugin, player, () -> {
+						if (error != null) {
+						Main.plugin.getLogger().warning("Could not teleport " + player.getName() + ": " + error.getMessage());
+						cancel();
+						return;
+						}
+						if (Boolean.TRUE.equals(success)) {
+							MessageManager.sendMessage(player, reference);
+						} else {
+							cancel();
+						}
+					}));
+			return;
+		}
+
+		if (player.teleport(location)) {
+			MessageManager.sendMessage(player, reference);
+		} else {
+			cancel();
+		}
 	}
 
 	public boolean canTp() {

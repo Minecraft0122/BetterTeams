@@ -74,7 +74,7 @@ public class WarpCommand extends TeamSubCommand {
 
 	@Override
 	public int getMaximumArguments() {
-		return 1;
+		return 2;
 	}
 
 	@Override
